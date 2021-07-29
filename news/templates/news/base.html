@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if title %}
+        <title>Топ20 - {{ title }}</title>
+    {% else %}
+        <title>Топ20 Новини</title>
+    {% endif %}
+</head>
+<body>
+    {% block content%}{% endblock %}
+</body>
+</html>
