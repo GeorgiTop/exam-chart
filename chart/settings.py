@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
+
 import django_heroku
 from os.path import join
 from pathlib import Path
@@ -144,6 +146,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'news-home'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/media')
+MEDIA_URL = '/media/'
 
 django_heroku.settings(locals())
 
