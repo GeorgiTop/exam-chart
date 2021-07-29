@@ -6,5 +6,5 @@ def home(request):
     # context = {
     #     'songs': songs
     # }
-    return render(request, 'index.html')
+    return render(request, 'main_block.html')
 # Create your views here.
