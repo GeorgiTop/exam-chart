@@ -11,11 +11,14 @@
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Log In</button>
+                <small class="text-muted ml-2">
+                    <a class="ml-2" href="{% url 'password_reset' %}">Foorgot Password?</a>
+                </small>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Don't You Have An Account? Make One <a class="ml-2" href="{% url 'register' %}">Here</a>.
+                Don't You Have An Account? Make One<a class="ml-2" href="{% url 'register' %}">Here</a>.
             </small>
         </div>
     </div>
