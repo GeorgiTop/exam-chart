@@ -1,8 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+
+
+# class UserCreateView(SuccessMessageMixin, FormView):
+#     form_class = UserRegisterForm
+#     template_name = 'users/register.html'
+#     success_message = 'Your account has been created!'
+#     success_url = '../news'
 
 
 def register(request):
@@ -49,3 +58,7 @@ def profile(request):
         'p_form': p_form,
     }
     return render(request, 'users/profile.html', context)
+
+
+
+

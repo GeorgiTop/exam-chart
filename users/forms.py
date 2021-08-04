@@ -24,10 +24,10 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['image', 'posts_per_page']
 
     def save(self, commit=True):
-        super().super()
+        super().save()
 
         img = Image.open(self.image.path)
 

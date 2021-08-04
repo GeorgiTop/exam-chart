@@ -4,6 +4,7 @@ from django.urls import path
 from . import views as user_views
 
 urlpatterns = [
+    # path('', user_views.UserCreateView.as_view(), name='register'),
     path('', user_views.register, name='register'),
     path(
         'login/',

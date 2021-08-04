@@ -2,13 +2,10 @@
 #
 # # Create your models here.
 #
-#
-# class Artist(models.Model):
-#     name = models.CharField(max_length=100)
-#     songs = models.ManyToManyField(Song)
+# from django.db import models
 #
 #
-# class Song(models.Model):
+# class Video(models.Model):
 #     name = models.CharField(max_length=45)
 #     artist_name = models.CharField(max_length=100)
 #     artists = models.ManyToManyField(Artist)
@@ -20,5 +17,12 @@
 #     spotify = models.URLField()
 #     itunes = models.URLField()
 #     picture = models.ImageField(upload_to='staticfiles')
+
+#
+# class Artist(models.Model):
+#     name = models.CharField(max_length=100)
+#     songs = models.ManyToManyField(Song)
+#
+#
 #
 #

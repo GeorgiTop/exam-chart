@@ -10,16 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-
-import django_heroku
 from os.path import join
 from pathlib import Path
-from decouple import config, Csv
 
+import django_heroku
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -32,7 +30,6 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'top20.apps.Top20Config',
-    'news.apps.NewsConfig',
     'users.apps.UsersConfig',
+    'news.apps.NewsConfig',
+    'vlog.apps.VlogConfig',
+    'top20.apps.Top20Config',
     'crispy_forms',
 ]
 
@@ -79,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chart.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -93,7 +90,6 @@ DATABASES = {
         'PORT': config('DB_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -113,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -126,7 +121,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (css, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -158,4 +152,3 @@ EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 
 django_heroku.settings(locals())
-
