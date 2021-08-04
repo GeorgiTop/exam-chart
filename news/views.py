@@ -7,16 +7,16 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 class PostListView(ListView):
     model = Post
-    template_name = 'news/home.html'
-    context_object_name = 'news'
+    template_name = 'blog/home.html'
+    context_object_name = 'blog'
     ordering = ['-date_posted']
     paginate_by = 5
 
 
 class UserPostListView(ListView):
     model = Post
-    template_name = 'news/user_posts.html'
-    context_object_name = 'news'
+    template_name = 'blog/user_posts.html'
+    context_object_name = 'blog'
     paginate_by = 5
 
     def get_queryset(self):
@@ -31,7 +31,7 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
-    success_url = '/news'
+    success_url = '/blog'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -55,7 +55,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = '/news'
+    success_url = '/blog'
 
     def test_func(self):
         post = self.get_object()
@@ -65,9 +65,9 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def video(request):
-    return render(request, 'news/video.html')
+    return render(request, 'blog/video.html')
 
 
 def blog(request):
-    return render(request, 'news/blog.html')
+    return render(request, 'blog/blog.html')
 # Create your views here.
