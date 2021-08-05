@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'top20',
     'crispy_forms',
     'embed_video',
+    'slugify',
 ]
 
 MIDDLEWARE = [

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
+# from django.utils.text import slugify
+from slugify import slugify
 from django.contrib.auth.models import User
 from users.models import Profile
 from django.utils import timezone
@@ -27,12 +28,12 @@ class VlogPost(models.Model):
 
     def save(self, *args, **kwargs):
         if self.slug is None:
-            slug = slugify(self)
+            slug = slugify(self.__str__())
             has_slug = VlogPost.objects.filter(slug=slug).exists()
             count = 1
             while has_slug:
                 count += 1
-                slug = slugify(self) + '_' + str(count)
+                slug = slugify(self.__str__()) + '_' + str(count)
                 has_slug = VlogPost.objects.filter(slug=slug).exists()
 
             self.slug = slug
