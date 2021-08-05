@@ -4,20 +4,21 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from users.models import Profile
 from django.utils import timezone
+from embed_video.fields import EmbedVideoField
 
 
 class VlogPost(models.Model):
     song_name = models.CharField(max_length=45)
     artist_name = models.CharField(max_length=100)
-    lyrics = models.CharField(max_length=110)
-    composer = models.CharField(max_length=110)
+    lyrics = models.CharField(max_length=110, null=True, blank=True)
+    music = models.CharField(max_length=110)
     arranged = models.CharField(max_length=110)
     producer = models.CharField(max_length=110)
-    youtube = models.URLField(null=False)
-    spotify = models.URLField()
-    itunes = models.URLField()
+    video_url = EmbedVideoField(null=False, blank=False, default='#')
+    spotify = models.URLField(null=True, blank=True)
+    itunes = models.URLField(null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    slug = models.SlugField(null=True, blank=True, editable=False)
+    slug = models.SlugField(null=True, blank=True, editable=True)
     date_posted = models.DateTimeField(default=timezone.now)
     is_public = models.BooleanField(default=True)
 
@@ -38,7 +39,7 @@ class VlogPost(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('vlog-detail', kwargs={'pk': self.pk})
+        return reverse('vlog-detail', kwargs={'slug': self.slug})
 
 
 class Like(models.Model):

@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django_currentuser.middleware import get_current_authenticated_user
-from .models import VlogPost
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django_currentuser.middleware import get_current_authenticated_user
+
+from .models import VlogPost
 
 
 def get_user_settings_posts_per_page(user):
@@ -18,8 +19,8 @@ def get_user_settings_posts_per_page(user):
 
 class VlogPostListView(LoginRequiredMixin, ListView):
     model = VlogPost
-    template_name = 'vlog/home.html'
-    context_object_name = 'vlog'
+    template_name = 'vlog/vlogpost_home.html'
+    context_object_name = 'vlogs'
     queryset = VlogPost.objects.filter(is_public=True).order_by('-date_posted')
     slug_field = 'slug'
 
@@ -30,8 +31,8 @@ class VlogPostListView(LoginRequiredMixin, ListView):
 
 class UserVlogPostListView(LoginRequiredMixin, ListView):
     model = VlogPost
-    template_name = 'vlog/user_posts.html'
-    context_object_name = 'vlog'
+    template_name = 'vlog/user_vlogposts.html'
+    context_object_name = 'vlogs'
 
     def get_paginate_by(self, *args, **kwargs):
         user = get_current_authenticated_user()
@@ -44,7 +45,18 @@ class UserVlogPostListView(LoginRequiredMixin, ListView):
 
 class VlogPostCreateView(LoginRequiredMixin, CreateView):
     model = VlogPost
-    fields = ['__all__']
+    fields = [
+        'song_name',
+        'artist_name',
+        'music',
+        'lyrics',
+        'arranged',
+        'producer',
+        'video_url',
+        'spotify',
+        'itunes',
+        'is_public'
+    ]
     success_url = '/'
 
     def form_valid(self, form):
@@ -60,6 +72,18 @@ class VlogPostDetailView(LoginRequiredMixin, DetailView):
 class VlogPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = VlogPost
     slug_field = 'slug'
+    fields = [
+        'song_name',
+        'artist_name',
+        'music',
+        'lyrics',
+        'arranged',
+        'producer',
+        'video_url',
+        'spotify',
+        'itunes',
+        'is_public'
+    ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

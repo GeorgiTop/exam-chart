@@ -40,11 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'users.apps.UsersConfig',
-    'news.apps.NewsConfig',
-    'vlog.apps.VlogConfig',
-    'top20.apps.Top20Config',
+    'users',
+    'news',
+    'vlog',
+    'top20',
     'crispy_forms',
+    'embed_video',
 ]
 
 MIDDLEWARE = [

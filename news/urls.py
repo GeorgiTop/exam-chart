@@ -8,6 +8,6 @@ urlpatterns = [
     path('<int:pk>/', views.PostDetailView.as_view(), name='news-detail'),
     path('<int:pk>/update', views.PostUpdateView.as_view(), name='news-update'),
     path('<int:pk>/delete', views.PostDeleteView.as_view(), name='news-delete'),
-    path('video/', views.video, name='news-video'),
+    # path('video/', views.video, name='news-video'),
     path('news/', views.blog, name='news-news'),
 ]

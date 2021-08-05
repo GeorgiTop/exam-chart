@@ -81,8 +81,8 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-def video(request):
-    return render(request, 'news/video.html')
+# def video(request):
+#     return render(request, 'news/video.html')
 
 
 def blog(request):
