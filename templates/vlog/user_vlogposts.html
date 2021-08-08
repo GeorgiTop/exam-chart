@@ -1,0 +1,58 @@
+{% extends '_common/base.html' %}
+{% load embed_video_tags %}
+{% block content %}
+    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    {% if is_paginated %}
+        {% include '_common/paginator.html' %}
+    {% endif %}
+    {% for post in vlogs %}
+        <div class="card mb-4">
+            <h2 class="card-header">
+                <a class="d-flex flex-wrap"
+                   href="{% url 'vlog-detail' post.slug %}">{{ post.artist_name }}
+                    - {{ post.song_name }}
+                </a>
+            </h2>
+            <div class="card-group">
+                <div class="card embed-responsive embed-responsive-16by9">
+                    {% video post.video_url '100% x 100%' %}
+                </div>
+                <div class="card">
+                    <ul class="list-group">
+                        <li class="list-group-item">Lyrics: {{ post.lyrics }} </li>
+                        <li class="list-group-item">Music: {{ post.music }}</li>
+                    </ul>
+                    {% if post.spotify or post.itunes or post.author == user %}
+                        <div class="card-group">
+                            {% if post.author == user %}
+                                <div class="card">
+                                    <a class="btn btn-secondary mx-1 my-1"
+                                       href="{% url 'vlog-update' post.slug %}">Update</a>
+                                    <a class="btn btn-danger mx-1 my-1"
+                                       href="{% url 'vlog-delete' post.slug %}">Delete</a>
+                                </div>
+                            {% endif %}
+                            <div class="card">
+                                {% if post.spotify %}
+                                    <a class="btn btn-info mx-1 my-1" href="{{ post.spotify }}">Spotify</a>
+                                {% endif %}
+                                {% if post.itunes %}
+                                    <a class="btn btn-info mx-1 my-1" href="{{ post.itunes }}">iTunes</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer">
+                <a class="mr-1"
+                   href="{% url 'user-vlog-posts' post.author.username %}">{{ post.author }}</a>
+                <a class="text-muted">on {{ post.date_posted|date:'F d, Y' }}</a>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+        {% include '_common/paginator.html' %}
+    {% endif %}
+{% endblock content %}

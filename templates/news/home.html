@@ -1,0 +1,28 @@
+{% extends '_common/base.html' %}
+{% block content %}
+
+    {% if is_paginated %}
+        {% include '_common/paginator.html' %}
+    {% endif %}
+
+    {% for post in news %}
+        {% if post.is_public %}
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt="porfile-pic">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                        <small class="text-muted">{{ post.date_posted|date:'F d, Y > H:i' }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'news-detail' post.id %}">{{ post.title }}</a></h2>
+                    <p class="article-content">{{ post.content }}</p>
+                </div>
+            </article>
+        {% endif %}
+    {% endfor %}
+
+    {% if is_paginated %}
+        {% include '_common/paginator.html' %}
+    {% endif %}
+    
+{% endblock content %}
