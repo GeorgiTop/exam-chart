@@ -63,7 +63,7 @@ class VlogPostCreateView(LoginRequiredMixin, CreateView):
         'itunes',
         'is_public'
     ]
-    success_url = '/'
+    success_url = '/video/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user

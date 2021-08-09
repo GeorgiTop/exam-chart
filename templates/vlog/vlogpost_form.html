@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section">
+    <div class="content-section col-xl-8">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Drop it like its hot!</legend>
+                <legend class="border-bottom mb-4 ">Drop it like its hot!</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">

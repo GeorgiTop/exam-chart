@@ -1,9 +1,48 @@
 {% extends '_common/base.html' %}
 {% load static %}
 {% block content %}
-<div><h1>Тука има</h1></div>
-<ul>
-    <iframe width="480" height="360" src="https://www.youtube.com/embed/lc2KvFbbfAQ?rel=0&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</ul>
-<div><h5>Тука нема</h5></div>
+    <div><h1 class="text-center">Python Web Framework</h1>
+        <h2 class="text-center">Individual Project Assignment</h2>
+        This is the Individual Project Assignment for the <a
+                href="https://softuni.bg/trainings/3356/python-web-framework-july-2021">Python Web Framework Course @
+            SoftUni.</a>
+        <p>I choose to develop Django Template Project
+            Project.</p>
+        <h3>1. Template Project (Django project)</h3>
+        <h4>Mandatory requirements/Must haves</h4>
+        <ul>Your project must have all this functionality to pass the final examination.
+            <li>The application must be implemented using Django Framework</li>
+            <li>The application must have at least 10 endpoints</li>
+            <li>The application must have login/register functionality</li>
+            <li>The application must have public part (A part of the website, which is accessible by everyone –
+                un/authenticated users and admins)
+            </li>
+            <li>The application must have private part (accessible only by authenticated user and admins)</li>
+            <li>The application must have admin part (accessible only to admins)</li>
+            <li>Unauthenticated users (public part) have only &#39;get&#39; permissions e.g., landing page, details,
+                about page
+            </li>
+            <li>Authenticated users (private part) have full CRUD for all their created content</li>
+            <li>Admins have full CRUD functionalities</li>
+            <li>Form validations</li>
+            <li>To avoid crashes, implement Error Handling and Data Validations</li>
+            <li>Use PostgreSQL as a database.</li>
+            <li>Write tests for at least 60% coverage on your business logic</li>
+            <li>Templates (your controllers/views must return HTML files) – one and the same template could be
+                re-used/used multiple times (with the according adjustments, if such needed)
+            </li>
+            <li>Use a source control system by choice – Github or Gitlab. You must have at least 5 commits + README</li>
+        </ul>
+        <h4>Optional/Bonuses</h4>
+        <ul>
+            <li>Responsive web design</li>
+            <li>Class-based views</li>
+            <li>Extended Django user</li>
+            <li>Documentation/ Swagger</li>
+            <li>Use a file storage cloud API e.g., Cloudinary, Dropbox, Google Drive or other for storing the files</li>
+            <li>Implement Microservice architecture in your application.</li>
+            <li>Additional functionality, not explicitly described in this section, will be counted as a bonus if it has
+                practical usage.
+            </li>
+        </ul>
 {% endblock content %}

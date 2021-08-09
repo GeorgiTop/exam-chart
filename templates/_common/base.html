@@ -7,9 +7,9 @@
         <div class="container">
             {#            <a class="navbar-brand mr-4" href="{% url 'top20-home' %}">Home</a>#}
             <a class="navbar-brand mr-4" href="{% url 'vlog-home' %}">
-                            <img src="{% static '/theme/file-play.svg' %}" style="filter: invert();"/></a>
+                            <img src="{% static '/theme/file-play.svg' %}" style="filter: invert();"/>Vlog</a>
             <a class="navbar-brand mr-auto" href="{% url 'news-home' %}">
-                            <img src="{% static '/theme/file-text.svg' %}" style="filter: invert();"/></a>
+                            <img src="{% static '/theme/file-text.svg' %}" style="filter: invert();"/>Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -24,18 +24,18 @@
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
                         <a class="nav-item nav-link" href="{% url 'vlog-create' %}">
-                            <img src="{% static '/theme/file-earmark-play.svg' %}" style="filter: invert();"/></a>
+                            <img src="{% static '/theme/file-earmark-play.svg' %}" style="filter: invert();"/> Add Video</a>
                         <a class="nav-item nav-link" href="{% url 'news-create' %}">
-                            <img src="{% static '/theme/file-earmark-text.svg' %}" style="filter: invert();"/></a>
+                            <img src="{% static '/theme/file-earmark-text.svg' %}" style="filter: invert();"/> Write A Post</a>
                         <a class="nav-item nav-link" href="{% url 'profile' %}">
-                        <img src="{% static '/theme/person.svg' %}" style="filter: invert();"/></a>
+                        <img src="{% static '/theme/person.svg' %}" style="filter: invert();"/>Profile</a>
                         <a class="nav-item nav-link" href="{% url 'logout' %}">
-                        <img src="{% static '/theme/box-arrow-right.svg' %}" style="filter: invert();"/></a>
+                        <img src="{% static '/theme/box-arrow-right.svg' %}" style="filter: invert();"/> LogOut</a>
                     {% else %}
                         <a class="nav-item nav-link" href="{% url 'login' %}">
-                        <img src="{% static '/theme/box-arrow-in-right.svg' %}" style="filter: invert();"/></a>
+                        <img src="{% static '/theme/box-arrow-in-right.svg' %}" style="filter: invert();"/> LogIn</a>
                         <a class="nav-item nav-link" href="{% url 'register' %}">
-                        <img src="{% static '/theme/person-plus.svg' %}" style="filter: invert();"/></a>
+                        <img src="{% static '/theme/person-plus.svg' %}" style="filter: invert();"/> Sign In</a>
                     {% endif %}
                 </div>
             </div>

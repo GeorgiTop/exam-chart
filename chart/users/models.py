@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+# from PIL import Image
 
 
 class Profile(models.Model):
