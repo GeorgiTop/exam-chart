@@ -1,7 +1,10 @@
+import os
+from os.path import join
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile
+from .. import settings
 
 
 class UserRegisterForm(UserCreationForm):
@@ -25,15 +28,9 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['image', 'posts_per_page']
 
-    # def save(self, commit=True):
-    #     super().save()
-    #
-    #     img = Image.open(self.image.path)
-    #
-    #     if img.height > 300 or img.width > 300:
-    #         output_size = (300, 300)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.path)
-
-
-
+    def save(self, commit=True):
+        db_profile = Profile.objects.get(pk=self.instance.id)
+        if commit:
+            image_path = join(settings.MEDIA_ROOT, str(db_profile.image))
+            os.remove(image_path)
+        return super().save(commit)

@@ -3,7 +3,8 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
+from django.urls import reverse_lazy
+from django.views.generic import FormView, CreateView
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
@@ -13,19 +14,32 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 #     success_message = 'Your account has been created!'
 #     success_url = '../news'
 
+class UserCreateView(SuccessMessageMixin, CreateView):
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('news-home')
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            login(request, user)
-            messages.success(request, f'Welcome {username}! Your account has been created!')
-            return redirect('news-home')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    def get_success_message(self, cleaned_data):
+        self.success_message = f'Welcome {self.object}! Your account has been created!'
+        return self.success_message % cleaned_data
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        login(self.request, self.object)
+        return result
+
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserRegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             username = form.cleaned_data.get('username')
+#             login(request, user)
+#             messages.success(request, f'Welcome {username}! Your account has been created!')
+#             return redirect('news-home')
+#     else:
+#         form = UserRegisterForm()
+#     return render(request, 'users/register.html', {'form': form})
 
 
 @login_required

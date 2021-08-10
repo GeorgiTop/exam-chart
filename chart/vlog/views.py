@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django_currentuser.middleware import get_current_authenticated_user
 
@@ -63,7 +64,7 @@ class VlogPostCreateView(LoginRequiredMixin, CreateView):
         'itunes',
         'is_public'
     ]
-    success_url = '/video/'
+    success_url = reverse_lazy('/video/')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -96,19 +97,19 @@ class VlogPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        vlog_post = self.get_object()
+        if self.request.user == vlog_post.author:
             return True
         return False
 
 
 class VlogPostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = VlogPost
-    success_url = '/video/'
+    success_url = reverse_lazy('/video/')
     slug_field = 'slug'
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        vlog_post = self.get_object()
+        if self.request.user == vlog_post.author:
             return True
         return False
