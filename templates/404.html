@@ -1,0 +1,19 @@
+{% extends '_common/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Error</h2>
+            <h1>404<br><small>Not found</small></h1>
+            <h1><small>{{ exception }}</small></h1>
+            <p class="lead">Should you be here?</p>
+            <a href="/" class="btn btn-link">Home</a>
+            <span class="divider">·</span>
+            <a href="/video/" class="btn btn-link">Vlog</a>
+            <span class="divider">·</span>
+            <a href="/news/" class="btn btn-link">Blog</a>
+            <span class="divider">·</span>
+            <a href="/login" class="btn btn-link">Log in</a>
+        </div>
+    </div>
+{% endblock content %}

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django_currentuser.middleware import get_current_authenticated_user
-from .models import Post
+from .models import NewsPost
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 
@@ -18,10 +18,10 @@ def get_user_settings_posts_per_page(user):
 
 
 class PostListView(LoginRequiredMixin, ListView):
-    model = Post
+    model = NewsPost
     template_name = 'news/home.html'
     context_object_name = 'news'
-    queryset = Post.objects.filter(is_public=True).order_by('-date_posted')
+    queryset = NewsPost.objects.filter(is_public=True).order_by('-date_posted')
 
     def get_paginate_by(self, *args, **kwargs):
         user = get_current_authenticated_user()
@@ -29,7 +29,7 @@ class PostListView(LoginRequiredMixin, ListView):
 
 
 class UserPostListView(LoginRequiredMixin, ListView):
-    model = Post
+    model = NewsPost
     template_name = 'news/user_posts.html'
     context_object_name = 'news'
 
@@ -39,15 +39,15 @@ class UserPostListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        return NewsPost.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
-    model = Post
+    model = NewsPost
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
+    model = NewsPost
     fields = ['title', 'content']
     success_url = reverse_lazy('/news')
 
@@ -57,7 +57,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Post
+    model = NewsPost
     fields = ['title', 'content']
 
     def form_valid(self, form):
@@ -72,7 +72,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Post
+    model = NewsPost
     success_url = reverse_lazy('/news')
 
     def test_func(self):

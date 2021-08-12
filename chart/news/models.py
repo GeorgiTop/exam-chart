@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-class Post(models.Model):
+class NewsPost(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     is_public = models.BooleanField(default=True)

@@ -44,7 +44,7 @@ class VlogPost(models.Model):
 
 
 class Like(models.Model):
-    video = models.ForeignKey(VlogPost, on_delete=models.CASCADE)
+    vlog_post = models.ForeignKey(VlogPost, on_delete=models.CASCADE)
     user = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
