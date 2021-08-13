@@ -31,7 +31,7 @@ class NewsPostListView(LoginRequiredMixin, ListView):
 class UserPostListView(LoginRequiredMixin, ListView):
     model = NewsPost
     template_name = 'news/user_posts.html'
-    context_object_name = 'news/'
+    context_object_name = 'news'
 
     def get_paginate_by(self, *args, **kwargs):
         user = get_current_authenticated_user()
@@ -47,10 +47,10 @@ class NewsPostDetailView(LoginRequiredMixin, DetailView):
 
 
 class NewsPostCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'news/post_form.html'
+    template_name = 'news/newspost_form.html'
     model = NewsPost
     fields = ['title', 'content']
-    success_url = reverse_lazy('news/')
+    success_url = reverse_lazy('news-home')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -60,6 +60,7 @@ class NewsPostCreateView(LoginRequiredMixin, CreateView):
 class NewsPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = NewsPost
     fields = ['title', 'content']
+    success_url = reverse_lazy('news-home')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -74,7 +75,7 @@ class NewsPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class NewsPostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = NewsPost
-    success_url = reverse_lazy('/news')
+    success_url = reverse_lazy('news-home')
 
     def test_func(self):
         post = self.get_object()

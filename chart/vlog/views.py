@@ -52,6 +52,7 @@ class UserVlogPostListView(LoginRequiredMixin, ListView):
 
 class VlogPostCreateView(LoginRequiredMixin, CreateView):
     model = VlogPost
+    success_url = reverse_lazy('vlog-home')
     fields = [
         'song_name',
         'artist_name',
@@ -64,7 +65,6 @@ class VlogPostCreateView(LoginRequiredMixin, CreateView):
         'itunes',
         'is_public'
     ]
-    success_url = reverse_lazy('/video/')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -79,6 +79,7 @@ class VlogPostDetailView(LoginRequiredMixin, DetailView):
 class VlogPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = VlogPost
     slug_field = 'slug'
+    success_url = reverse_lazy('vlog-home')
     fields = [
         'song_name',
         'artist_name',
@@ -105,7 +106,7 @@ class VlogPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class VlogPostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = VlogPost
-    success_url = reverse_lazy('/video/')
+    success_url = reverse_lazy('vlog-home')
     slug_field = 'slug'
 
     def test_func(self):
