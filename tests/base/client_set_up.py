@@ -5,9 +5,9 @@ UserModel = get_user_model()
 
 
 class ChartTestCase(TestCase):
-    logged_in_user_username = 'TestUser'
-    logged_in_user_email = 'test_user@test.us'
-    logged_in_user_password = 'Test!ng42'
+    user_username = 'TestUser'
+    user_email = 'test_user@test.us'
+    user_password = 'Test!ng42'
 
     def assertListEmpty(self, ll):
         return self.assertListEqual([], ll, 'The list is not empty')
@@ -15,7 +15,7 @@ class ChartTestCase(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = UserModel.objects.create_user(
-            username=self.logged_in_user_username,
-            email=self.logged_in_user_email,
-            password=self.logged_in_user_password,
+            username=self.user_username,
+            email=self.user_email,
+            password=self.user_password,
         )

@@ -20,8 +20,8 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name='users/logout.html'),
         name="logout"
     ),
-    # path('profile/', user_views.profile, name='profile'),
-    path('profile/', user_views.ProfileUpdateView.as_view(), name='profile'),
+    path('profile/', user_views.profile, name='profile'),
+    # path('profile/', user_views.ProfileUpdateView.as_view(), name='profile'),
     path(
         'password-reset/',
         auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),

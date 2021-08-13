@@ -25,3 +25,5 @@ urlpatterns = [
     path('news/', include('chart.news.urls')),
     path('video/', include('chart.vlog.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

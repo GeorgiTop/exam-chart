@@ -6,4 +6,4 @@ class UsersConfig(AppConfig):
     name = 'chart.users'
 
     def ready(self):
-        pass
+        import chart.users.signals

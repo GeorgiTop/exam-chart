@@ -17,7 +17,7 @@ def get_user_settings_posts_per_page(user):
     return user_setting_pages
 
 
-class PostListView(LoginRequiredMixin, ListView):
+class NewsPostListView(LoginRequiredMixin, ListView):
     model = NewsPost
     template_name = 'news/home.html'
     context_object_name = 'news'
@@ -31,7 +31,7 @@ class PostListView(LoginRequiredMixin, ListView):
 class UserPostListView(LoginRequiredMixin, ListView):
     model = NewsPost
     template_name = 'news/user_posts.html'
-    context_object_name = 'news'
+    context_object_name = 'news/'
 
     def get_paginate_by(self, *args, **kwargs):
         user = get_current_authenticated_user()
@@ -42,21 +42,22 @@ class UserPostListView(LoginRequiredMixin, ListView):
         return NewsPost.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetailView(LoginRequiredMixin, DetailView):
+class NewsPostDetailView(LoginRequiredMixin, DetailView):
     model = NewsPost
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class NewsPostCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'news/post_form.html'
     model = NewsPost
     fields = ['title', 'content']
-    success_url = reverse_lazy('/news')
+    success_url = reverse_lazy('news/')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class NewsPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = NewsPost
     fields = ['title', 'content']
 
@@ -71,7 +72,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class NewsPostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = NewsPost
     success_url = reverse_lazy('/news')
 
@@ -82,5 +83,5 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-def blog(request):
-    return render(request, 'news/blog.html')
+# def blog(request):
+#     return render(request, 'news/blog.html')
