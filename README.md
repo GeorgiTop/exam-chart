@@ -1,5 +1,5 @@
 # exam-chart
-Django exam project
+Django exam project (exam date - 14.08.2021)
 
 Passion project insiered by top20.bnr.bg
 
