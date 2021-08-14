@@ -8,7 +8,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 
 def get_user_settings_posts_per_page(user):
-    """ Unauthenticated user has no attribute user_setting_pages """
+    """ Unauthenticated user has no attribute profile.posts_per_page """
     try:
         user_setting_pages = user.profile.posts_per_page
     except AttributeError:
@@ -24,8 +24,7 @@ class NewsPostListView(LoginRequiredMixin, ListView):
     queryset = NewsPost.objects.filter(is_public=True).order_by('-date_posted')
 
     def get_paginate_by(self, *args, **kwargs):
-        user = get_current_authenticated_user()
-        return get_user_settings_posts_per_page(user)
+        return get_user_settings_posts_per_page(self.request.user)
 
 
 class UserPostListView(LoginRequiredMixin, ListView):

@@ -17,6 +17,7 @@ from shapeshifter.views import MultiFormView
 #     success_url = '../news'
 
 class UserCreateView(SuccessMessageMixin, CreateView):
+    template_name = 'users/register.html'
     form_class = UserRegisterForm
     success_url = reverse_lazy('top20-home')
 

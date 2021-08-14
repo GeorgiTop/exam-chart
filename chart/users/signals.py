@@ -1,6 +1,4 @@
 import os
-from os.path import join
-from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -16,7 +14,7 @@ def create_profile(sender, instance, created, **kwargs):
 @receiver(pre_save, sender=Profile)
 def remove_old_profile_picture(sender, instance, **kwargs):
     # on creation, signal callback won't be triggered
-    if instance._state.adding and not istance.pk:
+    if instance._state.adding and not instance.pk:
         return False
 
     try:
